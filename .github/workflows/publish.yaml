@@ -1,0 +1,31 @@
+name: Publish Docker image
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-image:
+    name: Publish image to GitHub Registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
+      - name: Docker Metadata
+        id: metadata
+        uses: docker/metadata-action@v4
+        with:
+          images: ghcr.io/voidstack-io/supertokens-auth-api
+      - name: Build and Push Container
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
