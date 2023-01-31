@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+#  auth-api:
+#    image: voidstack-io/supertokens-auth-api:development
+#    build:
+#      context: .
+#      dockerfile: ./.deploy/Dockerfile
+#    ports:
+#      - 3000:3000
+#    depends_on:
+#      - redis
+#      - supertokens
+#    environment:
+#      REDIS_HOST: redis
+#      SUPERTOKENS_DASHBOARD_API_KEY: password
+#      SUPERTOKENS_CONNECTION_URI: http://supertokens:3567
+#      SUPERTOKENS_COOKIE_SECURE: false
+#      SUPERTOKENS_ENABLE_THIRDPARTY_PROVIDERS: "google,github,apple"
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: supertokens
+      POSTGRES_USER: supertokens
+      POSTGRES_DB: supertokens
+
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:4.3
+    depends_on:
+      - postgres
+    ports:
+      - 3567:3567
+    environment:
+      POSTGRESQL_CONNECTION_URI: "postgresql://supertokens:supertokens@postgres:5432/supertokens"

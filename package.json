@@ -1,0 +1,53 @@
+{
+  "name": "supertokens-auth-api",
+  "version": "1.0.0",
+  "description": "Public facing API server for SuperTokens",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn -r dotenv/config src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && tsc",
+    "start": "node -r dotenv/config dist/server.js",
+    "lint": "eslint --fix --ext .ts",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
+  },
+  "author": "VoidStack Development",
+  "license": "MIT",
+  "devDependencies": {
+    "@swc/core": ">=1.2.50",
+    "@swc/wasm": ">=1.2.50",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "node-notifier": "*",
+    "prettier": "^2.8.3",
+    "rimraf": "^4.1.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "@swc/core": ">=1.2.50",
+    "@swc/wasm": ">=1.2.50",
+    "node-notifier": "*"
+  },
+  "dependencies": {
+    "@fastify/circuit-breaker": "^3.1.0",
+    "@fastify/cors": "^8.2.0",
+    "@fastify/csrf-protection": "^6.1.0",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/helmet": "^10.1.0",
+    "@fastify/rate-limit": "^7.6.0",
+    "@gquittet/graceful-server": "^4.0.4",
+    "@immobiliarelabs/fastify-sentry": "5.0.0-next.1",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.12.0",
+    "fastify-healthcheck": "^4.4.0",
+    "fastify-mailer": "^2.3.1",
+    "fastify-no-icon": "^6.0.0",
+    "ioredis": "^5.3.0",
+    "nodemailer": "^6.9.1",
+    "supertokens-node": "^12.1.6"
+  }
+}

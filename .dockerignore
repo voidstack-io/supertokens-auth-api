@@ -1,0 +1,8 @@
+node_modules
+.deploy
+.github
+.env
+.env.example
+.eslintrc.js
+.prettierrc
+docker-compose.yaml
